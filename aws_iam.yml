@@ -5,7 +5,6 @@
     - 'vars/users.yml'
   vars:
     sidpasswd: "{{ password }}"
-    user_opts.state: "{{ user_state }}"
   gather_facts: False
   tasks:
     - name: Statefully manage IAM groups
@@ -23,7 +22,7 @@
       iam:
         iam_type: user
         name: "{{ item.name }}"
-        state: "{{ user_opts.state }}"
+        state: "{{ user_state }}"
         groups: "{{ item.aws_groups }}"
         password: "{{ sidpasswd }}"
       loop: "{{ users }}"
